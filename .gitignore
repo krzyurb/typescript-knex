@@ -1,0 +1,21 @@
+# Logs
+logs
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory used by jest
+coverage
+.nyc_output
+
+# Compiled js
+dist/
+
+# Dependency directories
+node_modules/
+
+# IDE configuration directories
+.vscode/
+
+# Temp macOS files
+.DS_Store

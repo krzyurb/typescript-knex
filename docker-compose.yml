@@ -1,0 +1,52 @@
+version: "3.7"
+
+x-envs: &envs
+  NODE_ENV: development
+  DB_HOST: db
+  DB_PORT: 3306
+  DB_NAME: ddbb
+  DB_USER: admin
+  DB_PASSWORD: pass
+
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: admin
+      POSTGRES_DB: ddbb
+    volumes:
+      - appdb:/data/postgres
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  example-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: node:lts
+    container_name: example-app
+    restart: unless-stopped
+    environment: *envs
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/usr/src/app
+    networks:
+      - backend
+    depends_on:
+      - db
+    command: ['yarn', 'dev']
+
+networks:
+  backend:
+
+volumes:
+  appdb:
