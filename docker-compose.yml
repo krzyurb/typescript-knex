@@ -3,7 +3,7 @@ version: "3.7"
 x-envs: &envs
   NODE_ENV: development
   DB_HOST: db
-  DB_PORT: 3306
+  DB_PORT: 5432
   DB_NAME: ddbb
   DB_USER: admin
   DB_PASSWORD: pass
@@ -16,6 +16,8 @@ services:
       POSTGRES_PASSWORD: pass
       POSTGRES_USER: admin
       POSTGRES_DB: ddbb
+    ports:
+      - 5432:5432
     volumes:
       - appdb:/data/postgres
     networks:

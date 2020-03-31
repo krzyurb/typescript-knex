@@ -8,7 +8,9 @@
     "start": "ts-node src/index.ts",
     "build": "tsc -p . && yarn copy-locales",
     "test": "yarn jest --runInBand",
-    "lint": "eslint --ext .ts src/ tests/"
+    "lint": "eslint --ext .ts src/ tests/",
+    "db:migrate:make": "yarn knex --migrations-directory src/db/migrations -x ts migrate:make",
+    "db:migrate:latest": "yarn knex --knexfile knexfile.ts migrate:latest"
   },
   "husky": {
     "hooks": {
@@ -37,6 +39,8 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.20.13",
+    "pg": "^8.0.0"
   }
 }
