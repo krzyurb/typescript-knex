@@ -19,7 +19,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - appdb:/data/postgres
+      - appdb:/var/lib/postgresql/data
     networks:
       - backend
 

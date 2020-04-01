@@ -1,10 +1,9 @@
 import knex from 'knex';
-import Knex from 'knex';
+import { knexSnakeCaseMappers } from './knexSnakeCaseMappers';
 
-export const buildDb = (): Knex =>
+export const buildDb = (): knex =>
   knex({
     client: 'pg',
-    version: '7.2',
     connection: {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
@@ -12,4 +11,6 @@ export const buildDb = (): Knex =>
       port: parseInt(process.env.DB_PORT || '5432', 10),
       database: process.env.DB_NAME,
     },
+    searchPath: ['knex', 'public'],
+    ...knexSnakeCaseMappers(),
   });

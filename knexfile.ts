@@ -2,7 +2,6 @@ require('ts-node/register');
 
 module.exports = {
   client: 'pg',
-  version: '7.2',
   connection: {
     host: 'db',
     user: 'admin',

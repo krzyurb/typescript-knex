@@ -2,3 +2,7 @@
 
 duh.
 
+## TODO
+
+* CRUD of _Products_
+* Tests

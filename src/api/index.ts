@@ -1,4 +1,12 @@
 import { Router } from 'express';
-import { getProductRoute } from './getProduct.route';
+import Knex from 'knex';
 
-export const buildApi = (): Router => Router().get('/products/:id', getProductRoute);
+import { getProductRoute } from './getProduct.route';
+import { createProductRoute } from './createProduct.route';
+import { listProductsRoute } from './listProducts.route';
+
+export const buildApi = (db: Knex): Router =>
+  Router()
+    .get('/products', listProductsRoute(db))
+    .get('/products/:id', getProductRoute(db))
+    .post('/products', createProductRoute(db));
