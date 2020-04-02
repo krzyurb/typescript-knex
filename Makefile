@@ -8,3 +8,7 @@ logs:
 
 down:
 	$(DOCKER_COMPOSE) down
+
+migrate-latest:
+	@echo "Run latest migrations..."
+	$(DOCKER_COMPOSE) run --rm example-app yarn db:migrate:latest

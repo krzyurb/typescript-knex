@@ -12,11 +12,6 @@
     "db:migrate:make": "yarn knex --migrations-directory src/db/migrations -x ts migrate:make",
     "db:migrate:latest": "yarn knex --knexfile knexfile.ts migrate:latest"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn test && yarn lint"
-    }
-  },
   "author": "krzyurb",
   "license": "ISC",
   "devDependencies": {
@@ -24,6 +19,7 @@
     "@types/faker": "^4.1.10",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.5.3",
+    "@types/ramda": "^0.27.3",
     "@types/uuid": "^7.0.2",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
@@ -43,6 +39,7 @@
     "express": "^4.17.1",
     "knex": "^0.20.13",
     "pg": "^8.0.0",
+    "ramda": "^0.27.0",
     "uuid": "^7.0.3"
   }
 }

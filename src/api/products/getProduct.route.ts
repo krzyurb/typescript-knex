@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import Knex from 'knex';
 
-import { getProductById } from '../db/queries/products';
+import { getProductById } from '../../db/queries/products';
 
 export const getProductRoute = (db: Knex) => async (
   req: Request,

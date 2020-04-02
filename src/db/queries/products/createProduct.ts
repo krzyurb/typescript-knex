@@ -1,22 +1,33 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import knex from 'knex';
+import { curry, pipe, andThen, head } from 'ramda';
 import { v4 } from 'uuid';
+import knex from 'knex';
 
 import { Tables } from '../../tables';
 import { IProduct } from '.';
 
-export type CreateProductData = Pick<IProduct, 'name' | 'description' | 'price'>;
+export type CreateProductData = Pick<
+  IProduct,
+  'name' | 'description' | 'price'
+>;
 
-export const createProduct = async (db: knex, data: CreateProductData): Promise<IProduct> => {
-  const result = await db<IProduct>(Tables.PRODUCTS)
-    .insert({
-      id: v4(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      ...data,
-    })
+const prepareInput = (data: CreateProductData): IProduct => ({
+  id: v4(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  ...data,
+});
+
+const storeInDb = (db: knex, data: IProduct): Promise<IProduct[]> =>
+  db<IProduct>(Tables.PRODUCTS)
+    .insert(data)
     .returning('*');
 
-  return result[0];
-};
+const curriedStoreInDb = curry(storeInDb);
+
+export const createProduct = async (
+  db: knex,
+  data: CreateProductData,
+): Promise<IProduct | undefined> =>
+  pipe(prepareInput, curriedStoreInDb(db), andThen(head))(data);

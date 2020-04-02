@@ -166,7 +166,11 @@ function keyMapper(mapper: any) {
   };
 }
 
-function knexIdentifierMappers({ parse, format, idSeparator = ':' }: any = {}): any {
+function knexIdentifierMappers({
+  parse,
+  format,
+  idSeparator = ':',
+}: any = {}): any {
   const formatId = memoize(mapLastPart(format, idSeparator));
   const parseId = memoize(mapLastPart(parse, idSeparator));
   const parseKeys = keyMapper(parseId);
