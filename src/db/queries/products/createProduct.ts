@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import { curry, pipe, andThen, head } from 'ramda';
 import { v4 } from 'uuid';
 import knex from 'knex';
