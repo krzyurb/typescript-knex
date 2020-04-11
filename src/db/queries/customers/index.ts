@@ -1,4 +1,5 @@
 export * from './getCustomerById';
+export * from './createCustomer';
 
 export interface ICustomer {
   id: string;

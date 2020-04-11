@@ -9,8 +9,10 @@
     "build": "tsc -p . && yarn copy-locales",
     "test": "yarn jest --runInBand",
     "lint": "eslint --ext .ts src/ tests/",
+    "db:migrate": "yarn knex --knexfile knexfile.ts",
     "db:migrate:make": "yarn knex --migrations-directory src/db/migrations -x ts migrate:make",
-    "db:migrate:latest": "yarn knex --knexfile knexfile.ts migrate:latest"
+    "db:migrate:latest": "yarn db:migrate migrate:latest",
+    "db:migrate:rollback": "yarn db:migrate migrate:rollback"
   },
   "author": "krzyurb",
   "license": "ISC",

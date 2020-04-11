@@ -12,3 +12,7 @@ down:
 migrate-latest:
 	@echo "Run latest migrations..."
 	$(DOCKER_COMPOSE) run --rm example-app yarn db:migrate:latest
+
+migrate-rollback:
+	@echo "Rollback latest migration..."
+	$(DOCKER_COMPOSE) run --rm example-app yarn db:migrate:rollback
