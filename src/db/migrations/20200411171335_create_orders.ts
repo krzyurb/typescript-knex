@@ -1,8 +1,9 @@
 import Knex, { SchemaBuilder } from 'knex';
+import { Tables } from '../tables';
 
 export const up = (knex: Knex): Promise<SchemaBuilder | void> =>
   knex.schema
-    .createTable('orders', t => {
+    .createTable(Tables.ORDERS, t => {
       t.uuid('id').primary();
       t.uuid('customer_id')
         .references('id')
@@ -10,7 +11,7 @@ export const up = (knex: Knex): Promise<SchemaBuilder | void> =>
         .notNullable();
       t.timestamps();
     })
-    .createTable('product_orders', t => {
+    .createTable(Tables.PRODUCT_ORDERS, t => {
       t.uuid('id').primary();
       t.uuid('product_id')
         .references('id')
@@ -25,4 +26,4 @@ export const up = (knex: Knex): Promise<SchemaBuilder | void> =>
     });
 
 export const down = (knex: Knex): SchemaBuilder =>
-  knex.schema.dropTable('product_orders').dropTable('orders');
+  knex.schema.dropTable(Tables.PRODUCT_ORDERS).dropTable(Tables.ORDERS);
