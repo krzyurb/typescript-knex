@@ -1,4 +1,5 @@
 export * from './getOrdersForCustomer';
+export * from './createOrder';
 
 export interface IOrder {
   id: string;
